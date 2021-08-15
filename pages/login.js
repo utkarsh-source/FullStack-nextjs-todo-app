@@ -11,7 +11,7 @@ function Login() {
 
     const { dispatch, state: { authDetails: { token, isLoading, userName} } } = useContext(Context)
     const [addUser, { data, error, loading }] = useMutation(ADD_USER)
-    const [getUser, { data: userData, loading: userLoading }] = useLazyQuery(GET_USER)
+    const [getUser, { data: userData, loading: userLoading, called }] = useLazyQuery(GET_USER)
     const userId = userData?.users_by_pk?.id
     const router = useRouter()
 
@@ -22,22 +22,28 @@ function Login() {
 
 
     useEffect(() => {
-        if (userId && token && userName) {
+        if (token && userName) {
             getUser({
                 variables: {
                     id: JSON.stringify(token)
-                }
+                },
+                errorPolicy : 'ignore'
             })
-            if(userId === token) return
+        }
+    }, [token])
+    
+    useEffect(() => {
+        if (called && !userId) {
             addUser({
                 variables: {
                     id: JSON.stringify(token),
                     name: userName,
                 },
-                onCompleted: (()=>console.log('completed'))
             })
+            return
         }
-    }, [token, userId])
+        return
+    }, [userId, called])
 
 
     return (

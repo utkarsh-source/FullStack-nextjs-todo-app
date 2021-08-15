@@ -62,7 +62,7 @@ function Todo() {
         },
         transition: {
                     type: 'tween',
-                    duration: 0.2
+                    duration: 0.25
                 }
     }
 
@@ -79,7 +79,7 @@ function Todo() {
                     </motion.h1>
                 <AnimatePresence>
                         {isOpen &&
-                            <TodoInput toggle={toggle}/>
+                            <motion.div layout><TodoInput toggle={toggle}/></motion.div> 
                         }
                     </AnimatePresence>
                     <motion.p layout transition={{type:"tween" , duration: 0.2}} className="flex px-2 space-x-4 justify-end w-full mt-8">{isDeletingAllTodo ? <Loader /> : <motion.button transition={{type:"tween" , duration: 0.2}} layout onClick={deleteAllTodos} className={`${todosDetails.length < 1 && "hidden"} text-white bg-blue-500 px-4 py-1 rounded-full text-sm font-semibold `}>Delete all : {todosDetails.length}</motion.button>} {todosDetails.completedTodos >= 1 && isDeletingCompletedTodo ? <Loader /> : <button onClick={deleteCompletedTodos} className={`${todosDetails.completedTodos <1 && "hidden"} text-white bg-green-500 px-4 py-1 rounded-full text-sm font-semibold `}>Delete completed : {todosDetails.completedTodos}</button>}</motion.p>
