@@ -81,7 +81,7 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
                         </motion.div>}
                     </motion.div>
                     {isExpanded &&
-                        <motion.p key="description" layout key="description" variants={variants} animate="vissible" initial="hidden" exit="hidden" className="border-2 border-gray-300 font-semibold text-gray-500 text-sm rounded-2xl px-4 py-5 mt-3">
+                        <motion.p layout key="description" variants={variants} animate="vissible" initial="hidden" exit="hidden" className="border-2 border-gray-300 font-semibold text-gray-500 text-sm rounded-2xl px-4 py-5 mt-3">
                             <span className="block text-blue-500 text-sm font-semibold pb-3">Description</span>
                             {todo.description}
                         </motion.p>
