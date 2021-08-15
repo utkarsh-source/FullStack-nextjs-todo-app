@@ -84,7 +84,7 @@ function Todo() {
                     </AnimatePresence>
                     <motion.p layout transition={{type:"tween" , duration: 0.2}} className="flex px-2 space-x-4 justify-end w-full mt-8">{isDeletingAllTodo ? <Loader /> : <motion.button transition={{type:"tween" , duration: 0.2}} layout onClick={deleteAllTodos} className={`${todosDetails.length < 1 && "hidden"} text-white bg-blue-500 px-4 py-1 rounded-full text-sm font-semibold `}>Delete all : {todosDetails.length}</motion.button>} {todosDetails.completedTodos >= 1 && isDeletingCompletedTodo ? <Loader /> : <button onClick={deleteCompletedTodos} className={`${todosDetails.completedTodos <1 && "hidden"} text-white bg-green-500 px-4 py-1 rounded-full text-sm font-semibold `}>Delete completed : {todosDetails.completedTodos}</button>}</motion.p>
                 <motion.div layout transition={{type:"tween" , duration: 0.2}}  className="relative w-auto grid grid-cols-1 gap-y-3 py-4">
-                    {todosLoading ? <Loader className="mx-auto text-2xl"/> : !todos.length ? <p className="text-center text-blue-500 text-lg font-semibold border-2 border-gray-300 shadow-md rounded-md py-5">Ops : No Tasks yet!</p> : todos.map((todo, index) => {
+                    {todosLoading ? <Loader className="mx-auto text-2xl"/> : !todos?.length ? <p className="text-center text-blue-500 text-lg font-semibold border-2 border-gray-300 shadow-md rounded-md py-5">Ops : No Tasks yet!</p> : todos.map((todo, index) => {
                         return (
                             <Fragment key={todo.id}>
                                 <TodoItem todosLoading={todosLoading} todoNum={index+1} Loader={Loader} variants={toggle} todo={todo}/>
