@@ -1,8 +1,7 @@
 import {useRouter} from 'next/router'
 import { useEffect } from 'react';
 
-const withAuth = (WrappedComponent) => {
-
+function withAuth(WrappedComponent){
 
   return (props) => {
     if (typeof window !== "undefined") {
@@ -19,8 +18,7 @@ const withAuth = (WrappedComponent) => {
       }
       }, [accessToken])
 
-
-      return <WrappedComponent {...props} />;
+      return <WrappedComponent {...props} name="Wrapped Component" />;
     }
       return null;
       
