@@ -3,15 +3,19 @@ import firebase from 'firebase/app'
 import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from './actionType'
 import { client } from '../lib/Client'
 import { gql } from '@apollo/client'
+import router from 'next/router'
 
 
 
-export async function login(dispatch) {
+export async function login(dispatch, router) {
         try {
             dispatch({type : LOGIN_REQUEST})
             const provider = await new firebase.auth.GoogleAuthProvider()
             const authDetails = await auth.signInWithPopup(provider)
-            const accessToken = authDetails.credential.accessToken
+            const accessToken = authDetails.user.uid
+            if (accessToken) {
+                router.push('/')
+            }
             const profile = {
                 name : authDetails.additionalUserInfo.profile.name,
                 profileUrl : authDetails.additionalUserInfo.profile.picture,
@@ -130,6 +134,15 @@ export const DELETE_ALL_TODOS = gql`
     mutation{
         delete_todos(where:{}){
             affected_rows
+        }
+    }
+`
+
+export const GET_USER = gql`
+    query($id: String!){
+        users_by_pk(id:$id){
+            id
+            name
         }
     }
 `

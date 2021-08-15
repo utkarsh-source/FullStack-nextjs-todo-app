@@ -39,7 +39,6 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
     }
     const handleUpdateExpand = (shouldOpen = false) => {
         setUpdateExpand(shouldOpen)
-        setExpand(false)
     }
     const handleCompleteTodo = () => {
         updateTodo({
@@ -66,32 +65,28 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
     return (
         <>
             <AnimatePresence>
-                    <div className="relative w-full flex flex-col">
-                    {!toggledUpdateBox &&
-                        <motion.div layout variants={variants} initial="hidden" exit="hidden" animate="vissible" className={`relative flex ${isExpanded && "ring-2 border-blue-500"} items-center py-5 bg-im shadow-sm w-full border-2 border-gray-300 rounded-2xl px-4`}>
-                        {isUpdating ? <Loader/> : <FaCheckCircle onClick={handleCompleteTodo} className={`${!todosLoading &&todo.is_completed && "text-blue-500 text-2xl"} ring-2 ring-blue-500 cursor-pointer hover:scale-105 active:scale-95 transform rounded-full mr-5 text-2xl font-semibold text-white `} />}
-                            <p className={`relative font-semibold px-2 text-base`}>{todo.title}
-                                <motion.span variants={line_through} animate={`${(!todosLoading && todo.is_completed) ? 'show' : 'hide'}`}  className="block absolute w-full left-0 top-1/2 rounded-full -translate-y-1/2 h-0.5 bg-blue-500" ></motion.span>
+                    <motion.div transition={{type:"tween" , duration: 0.2}} layout className="relative w-full flex flex-col">
+                    {
+                        <motion.div key="title" layout variants={variants} initial="hidden" exit="hidden" animate="vissible" className={`relative flex ${isExpanded && "ring-2 border-blue-500"} items-center py-5 bg-im shadow-sm w-full border-2 border-gray-300 rounded-2xl px-4`}>
+                        {isUpdating ? <Loader/> : <FaCheckCircle onClick={handleCompleteTodo} className={`${!todosLoading &&todo.is_completed && "text-blue-500 text-2xl"} ring-2 ring-blue-500 cursor-pointer hover:scale-105 active:scale-95 transform rounded-full text-2xl font-semibold text-transparent `} />}
+                            <p className={`ml-5 relative font-semibold px-2 text-base`}>{todo.title}
+                                <motion.span transition={{type:"tween" , duration: 0.2}} variants={line_through} animate={`${(!todosLoading && todo.is_completed) ? 'show' : 'hide'}`}  className="block absolute w-full left-0 top-1/2 rounded-full -translate-y-1/2 h-0.5 bg-blue-500" ></motion.span>
                             </p>
                             <span className="ml-auto inline-flex space-x-4 items-center">
                                 <FaChevronDown onClick={handleExpand} className={`${isExpanded && "rotate-180 duration-200"} 
-                        text-lg transform transition-transform  cursor-pointer hover:scale-125 font-semibold text-blue-600 `} />
+                        text-xl transform transition-transform select-none hover:scale-125 font-semibold text-blue-500 `} />
                                 <FaPenAlt onClick={() => handleUpdateExpand(true)} className="text-indigo-500 text-lg cursor-pointer transform hover:scale-125" />
                                 {isDeleting ? <Loader /> : <FaTrashAlt onClick={handleDeleteTodo} className="text-red-600 text-lg cursor-pointer transform hover:scale-125" />}
                             </span>
                         </motion.div>}
-                        {/* <AnimatePresence> */}
-                            {toggledUpdateBox && <TodoInput todo={todo} isCompleted={isCompleted} todoNum={todoNum} handleUpdateExpand={handleUpdateExpand} toggle={variants} toUpdate/>}
-                        {/* </AnimatePresence> */}
-                    </div>
-            </AnimatePresence>
-            <AnimatePresence>
-                {isExpanded &&
-                    <motion.p key="description" layout variants={variants} animate="vissible" initial="hidden" className="border-2 border-gray-300 rounded-2xl px-4 py-5">
-                        <span className="block text-blue-500 text-sm font-semibold pb-3">Description</span>
-                        {todo.description}
-                    </motion.p>
-                }
+                    </motion.div>
+                    {isExpanded &&
+                        <motion.p key="description" layout key="description" variants={variants} animate="vissible" initial="hidden" exit="hidden" className="border-2 border-gray-300 font-semibold text-gray-500 text-sm rounded-2xl px-4 py-5 mt-3">
+                            <span className="block text-blue-500 text-sm font-semibold pb-3">Description</span>
+                            {todo.description}
+                        </motion.p>
+                    }
+                    {toggledUpdateBox && <motion.div transition={{type:"tween" , duration: 0.2}} key="update todo box" layout className="mt-3"> <TodoInput todo={todo} isCompleted={isCompleted} todoNum={todoNum} handleUpdateExpand={handleUpdateExpand} toggle={variants} toUpdate/></motion.div>}
             </AnimatePresence>
         </>
     )
