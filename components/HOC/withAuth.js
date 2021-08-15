@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 function withAuth(WrappedComponent){
 
-  return (props) => {
+  return function AuthGuard(props){
     if (typeof window !== "undefined") {
       const Router = useRouter();
 
@@ -18,7 +18,7 @@ function withAuth(WrappedComponent){
       }
       }, [accessToken])
 
-      return <WrappedComponent {...props} name="Wrapped Component" />;
+      return <WrappedComponent {...props}/>;
     }
       return null;
       
