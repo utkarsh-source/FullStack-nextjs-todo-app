@@ -1,20 +1,16 @@
 import {useRouter} from 'next/router'
-import { useEffect } from 'react';
 
 function withAuth(WrappedComponent){
-
   return function AuthGuard(props){
+    const Router = useRouter();     
       if (typeof window === "undefined") return null;
-      const Router = useRouter();
 
       const accessToken = sessionStorage.getItem("token");
       
-      useEffect(() => {
-          if (!accessToken) {
-          Router.replace("/login");
-          return null;
-        }
-      }, [accessToken])
+      if (!accessToken) {
+        Router.replace("/login");
+        return null;
+      }
 
       return <WrappedComponent {...props}/>;
     }
