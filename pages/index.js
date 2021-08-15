@@ -28,4 +28,6 @@ const Home = () => {
   )
 }
 
-export default withAuth(Home)
+const AuthGuard = withAuth(Home)
+
+export default AuthGuard

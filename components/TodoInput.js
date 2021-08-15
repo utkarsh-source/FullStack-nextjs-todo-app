@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import {Loader} from './Todo'
 import { ADD_TODOS, TODOS_OF_A_USER, UPDATE_TODOS_BY_TODO_ID } from "../action/actions"
 import { Context } from "../AppContext"
+import Notify from "./Notify"
 
 function TodoInput({isCompleted, todo, toggle, toUpdate, handleUpdateExpand, todoNum}) {
 
