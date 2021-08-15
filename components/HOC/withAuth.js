@@ -4,25 +4,20 @@ import { useEffect } from 'react';
 function withAuth(WrappedComponent){
 
   return function AuthGuard(props){
-    if (typeof window !== "undefined") {
+      if (typeof window === "undefined") return null;
       const Router = useRouter();
 
       const accessToken = sessionStorage.getItem("token");
-
-
       
       useEffect(() => {
-        if (!accessToken) {
-        Router.replace("/login");
-        return null;
-      }
+          if (!accessToken) {
+          Router.replace("/login");
+          return null;
+        }
       }, [accessToken])
 
       return <WrappedComponent {...props}/>;
     }
-      return null;
-      
-  };
 };
 
 export default withAuth;
