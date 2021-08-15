@@ -75,7 +75,7 @@ function Todo() {
     
         
     return (
-        <section className=" md:w-full w-screen min-h-screen relative flex md:items-center justify-center ">
+        <section className="md:w-full w-screen md:py-5 min-h-screen relative flex md:items-center justify-center ">
             <AnimateSharedLayout>
             <motion.div layout className="relative md:w-1/2 w-full h-auto border-2 border-gray-100 rounded-lg shadow-lg px-2 py-4">
                     <motion.h1 layout className="relative  flex items-center justify-center text-center font-semibold text-xl mb-8 py-3">Real Time Todo <button onClick={openInputBox} className="absolute h-12 w-12  right-0 top-1/2 transform -translate-y-1/2 rounded-3xl bg-blue-500 grid place-content-center">
