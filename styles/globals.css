@@ -8,32 +8,32 @@
 
 @media screen and (max-width: 768px) {
   html {
-    font-size: 90%;
+    font-size: 95%;
   }
 }
 @media screen and (max-width: 500px) {
   html {
-    font-size: 85%;
+    font-size: 93%;
   }
 }
 @media screen and (max-width: 450px) {
   html {
-    font-size: 80%;
+    font-size: 91%;
   }
 }
 @media screen and (max-width: 400px) {
   html {
-    font-size: 75%;
+    font-size: 90%;
   }
 }
 @media screen and (max-width: 350px) {
   html {
-    font-size: 73%;
+    font-size: 88%;
   }
 }
 @media screen and (max-width: 300px) {
   html {
-    font-size: 70%;
+    font-size: 85%;
   }
 }
 
