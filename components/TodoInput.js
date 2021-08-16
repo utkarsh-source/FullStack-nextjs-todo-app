@@ -4,13 +4,12 @@ import { useContext, useState } from "react"
 import {Loader} from './Todo'
 import { ADD_TODOS, TODOS_OF_A_USER, UPDATE_TODOS_BY_TODO_ID } from "../action/actions"
 import { Context } from "../AppContext"
-import Notify from "./Notify"
 
 function TodoInput({isCompleted, todo, toggle, toUpdate, handleUpdateExpand, todoNum}) {
 
     const [input, setInput] = useState({
-        title: "",
-        description: "",
+        title: todo?.title || "",
+        description: todo?.description || "",
     })
 
     const {state:{authDetails: {token}}} = useContext(Context)
@@ -24,7 +23,7 @@ function TodoInput({isCompleted, todo, toggle, toUpdate, handleUpdateExpand, tod
     const addTodo = () => {
         const todoData = {
             id: String(Math.random()),
-            user_id: JSON.stringify(token),
+            user_id: token,
             title: input.title,
             description: input.description,            
         }
@@ -32,14 +31,7 @@ function TodoInput({isCompleted, todo, toggle, toUpdate, handleUpdateExpand, tod
             variables: {
                 todos : [todoData]
             },
-            refetchQueries: [TODOS_OF_A_USER],
-            onCompleted: () => {
-                toast.success(<Notify>Added successfully!</Notify>)
-            },
-            onError: () => {
-                toast.error(<Notify>Something went wrong!</Notify>)
-            }
-            
+            refetchQueries: [TODOS_OF_A_USER],            
         })
     }
 
@@ -52,8 +44,6 @@ function TodoInput({isCompleted, todo, toggle, toUpdate, handleUpdateExpand, tod
                 desc: input.description,
             },
             refetchQueries: [TODOS_OF_A_USER],
-            onCompleted: (() => toast.error(<Notify>Updated successfully!</Notify>)),
-            onError: (()=> toast.error(<Notify>Something went wrong!</Notify>))
         })
     }
 

@@ -13,19 +13,16 @@ export async function login(dispatch, router) {
             const provider = await new firebase.auth.GoogleAuthProvider()
             const authDetails = await auth.signInWithPopup(provider)
             const accessToken = authDetails.user.uid
-            if (accessToken) {
-                router.push('/')
-            }
             const profile = {
                 name : authDetails.additionalUserInfo.profile.name,
                 profileUrl : authDetails.additionalUserInfo.profile.picture,
-            }
-            
+            }            
             sessionStorage.setItem("token", accessToken)
             sessionStorage.setItem("user", JSON.stringify(profile))
             dispatch({ type: LOGIN_SUCCESS, payload: { accessToken, profile } })
         } catch (error) {
-            dispatch({type : LOGIN_FAIL, payload : error.message})
+            console.log(error)
+            dispatch({type : LOGIN_FAIL})
         }
 }
 

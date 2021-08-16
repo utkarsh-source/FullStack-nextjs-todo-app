@@ -1,15 +1,11 @@
 import { useMutation } from '@apollo/client';
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { FaCheckCircle, FaChevronDown, FaChevronUp, FaPenAlt, FaTrashAlt } from 'react-icons/fa'
-import { toast } from 'react-toastify';
-import { COMPLETED_TODO, DELETE_TODOS_BY_TODO_ID, TODOS_OF_A_USER, UPDATE_TODOS_BY_TODO_ID } from '../action/actions';
-import Notify from './Notify';
+import {useState } from 'react'
+import { FaCheckCircle, FaChevronDown, FaPenAlt, FaTrashAlt } from 'react-icons/fa'
+import { COMPLETED_TODO, DELETE_TODOS_BY_TODO_ID, TODOS_OF_A_USER } from '../action/actions';
 import TodoInput from './TodoInput';
 
 
-
-toast.configure()
 
 function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
 
@@ -26,20 +22,19 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
                 todoId: todo.id
             },
             refetchQueries: [TODOS_OF_A_USER],
-            onCompleted: (data) => {
-                console.log(data)
-                toast.error(<Notify>Deleted successfully!</Notify>)
-            },
-            onError: () => {toast.error(<Notify>Something went wrong!</Notify>)}
         })
     }
+
 
     const handleExpand = () => {
         setExpand(!isExpanded)
     }
+
+
     const handleUpdateExpand = (shouldOpen = false) => {
         setUpdateExpand(shouldOpen)
     }
+
     const handleCompleteTodo = () => {
         updateTodo({
             variables: {
@@ -47,7 +42,6 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
                 completed: !todo.is_completed
             },
             refetchQueries: [TODOS_OF_A_USER],
-            onCompleted:(()=>console.log('completed'))
         })
     }
 

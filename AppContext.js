@@ -20,7 +20,7 @@ const reducers = (state, {type, payload}) => {
         case LOGIN_SUCCESS:
             return { ...state, authDetails: { isLoading: false, token: payload.accessToken, userName: payload.profile.name, userProfile: payload.profile.profileUrl } }
         case LOGIN_FAIL:
-            return { ...state, authDetails: { isLoading: false, error: payload.error } }
+            return { ...state, authDetails: { isLoading: false, error: true } }
         case LOGOUT:
             return { ...state, authDetails: { isLoading: false, token: null, userName: null, userProfile: null} }
         
