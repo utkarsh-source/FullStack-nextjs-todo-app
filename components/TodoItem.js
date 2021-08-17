@@ -48,7 +48,7 @@ function TodoItem({ todosLoading, todo, variants, Loader, todoNum}) {
     return (
         <>
             <AnimatePresence>
-                        <motion.div key="title" layout className={`relative flex ${isExpanded && "ring-2 border-blue-500"} items-center py-5 shadow-sm w-full border-2 border-gray-300 rounded-2xl px-4`}>
+                        <motion.div key="title" layout className={`relative flex ${isExpanded && "ring-blue-500 "}  items-center py-5 ring-2 ring-gray-300 shadow-sm w-full bg-white rounded-full px-6`}>
                             {isUpdating ? <Loader/> : <FaCheckCircle onClick={handleCompleteTodo} className={`${!todosLoading &&todo.is_completed && "text-blue-500"} ring-2 ring-blue-500 cursor-pointer hover:scale-105 active:scale-95 transform rounded-full text-lg font-semibold text-transparent `} />}
                             <p className={`ml-3 relative font-semibold px-2 text-base`}>{todo.title}
                             </p>
